@@ -17,11 +17,11 @@ public class UserService {
     public final UserRepository userRepository;
 
     private UserDTO mapToDTO(User user) {
-        return new UserDTO(user.getId(), user.getName(), user.getEmail(), user.getAddress(), user.getPassword());
+        return new UserDTO(user.getId(), user.getName(), user.getEmail(), user.getPassword(), user.getAddress());
     }
 
     private User mapToEntity(UserDTO userDTO) {
-        return new User(userDTO.getId(), userDTO.getName(),userDTO.getEmail(), userDTO.getAddress(), userDTO.getPassword());
+        return new User(userDTO.getId(), userDTO.getName(),userDTO.getEmail(), userDTO.getPassword(),userDTO.getAddress());
     }
 
     public UserDTO saveUser(UserDTO userDTO) {
