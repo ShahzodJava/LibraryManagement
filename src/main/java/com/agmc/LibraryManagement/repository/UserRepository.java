@@ -13,6 +13,9 @@ import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
 
+
+    public User findByEmail(String email);
+
     @Modifying
     @Transactional
     @Query(value = "update users set " +

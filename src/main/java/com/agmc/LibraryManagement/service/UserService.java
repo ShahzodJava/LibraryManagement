@@ -1,5 +1,7 @@
 package com.agmc.LibraryManagement.service;
 
+import com.agmc.LibraryManagement.exception.ResourceNotFoundException;
+import com.agmc.LibraryManagement.exception.UserAlreadyExistsException;
 import com.agmc.LibraryManagement.model.dto.UserDTO;
 import com.agmc.LibraryManagement.model.entity.User;
 import com.agmc.LibraryManagement.repository.UserRepository;
@@ -38,7 +40,13 @@ public class UserService {
 
     public UserDTO saveUser(UserDTO userDTO) {
         User user = mapToEntity(userDTO);
+        User existedUser = userRepository.findByEmail(user.getEmail());
+        if (existedUser!=null){
+            throw new UserAlreadyExistsException("User already exists");
+        }
+
         User savedUser = userRepository.save(user);
+
         return mapToDTO(savedUser);
     }
 
@@ -49,7 +57,9 @@ public class UserService {
     }
 
     public UserDTO getUserById(Long id) {
-        return mapToDTO(userRepository.getReferenceById(id));
+        User user = userRepository.findById(id).orElseThrow(
+                ()-> new ResourceNotFoundException("User not found with ID: " + id));
+        return mapToDTO(user);
     }
 
 
@@ -73,6 +83,8 @@ public class UserService {
     }
 
     public void deleteUser(Long id) {
+        userRepository.findById(id).orElseThrow(
+                ()-> new ResourceNotFoundException("User not found with ID" + id));
         userRepository.deleteById(id);
     }
 }

@@ -1,5 +1,6 @@
 package com.agmc.LibraryManagement.model.dto;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
@@ -10,12 +11,17 @@ import lombok.*;
 @Builder
 public class UserDTO {
     private Long id;
+
     @Size(min = 2, max = 200)
+    @NotBlank(message = "Name must not be blank")
     private String name;
-    @NotBlank
-//    @Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\\\.[A-Za-z]{2,6}$")
+
+    @NotBlank(message = "Email must not be blank")
+    @Email(message = "Email should be valid")
     private String email;
-    @NotNull
+
+    @NotNull(message = "Password cannot be null")
+    @Size(min = 8, message = "Password must be at list 8 characters long")
     private String password;
     private String address;
 }
