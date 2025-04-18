@@ -4,6 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -24,4 +26,5 @@ public class UserDTO {
     @Size(min = 8, message = "Password must be at list 8 characters long")
     private String password;
     private String address;
+    private LocalDateTime createdAt;
 }

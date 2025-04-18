@@ -1,7 +1,6 @@
 package com.agmc.LibraryManagement.controller;
 
 import com.agmc.LibraryManagement.model.dto.UserDTO;
-import com.agmc.LibraryManagement.model.entity.User;
 import com.agmc.LibraryManagement.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +16,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/create")
-    public ResponseEntity<UserDTO> createUser(@RequestBody @Valid UserDTO userDTO) {
+    public ResponseEntity<UserDTO> createUser(@Valid @RequestBody UserDTO userDTO) {
         return ResponseEntity.ok(userService.saveUser(userDTO));
     }
 

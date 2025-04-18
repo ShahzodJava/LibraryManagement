@@ -42,4 +42,16 @@ public class GlobalExceptionHandler {
                 .body(e.getMessage());
     }
 
+    @ExceptionHandler(BookAlreadyExistsException.class)
+    public ResponseEntity<?> handleBookExistsException(BookAlreadyExistsException e) {
+        ApiError error = new ApiError(HttpStatus.NOT_FOUND.value(), e.getMessage());
+        return new ResponseEntity<>(error,HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(IlleganStateException.class)
+    public ResponseEntity<?> handleException(IlleganStateException e){
+        ApiError error = new ApiError(HttpStatus.BAD_REQUEST.value(), e.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
 }

@@ -1,5 +1,4 @@
 package com.agmc.LibraryManagement.repository;
-
 import com.agmc.LibraryManagement.model.entity.User;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
